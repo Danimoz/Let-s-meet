@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <section>
+        <div>
+            <button class="p-3 m-2 btn-primary" onclick="addAgenda()">ADD AGENDA</button>
+        </div>
+
+        <div id="display"></div>
+
+        <div class="">
+            <button id="subMirt" class="hidden bg-green-600 text-white uppercase p-3 rounded-lg">SUBMIT</button>
+        </div>
+
+    </section>
+
+    <script>
+        let butn = document.getElementById('subMirt')
+
+        function addAgenda() {
+
+            let area = document.getElementById('display')
+            let div = document.createElement('div');
+            div.setAttribute("class", "w-full")
+
+            let agendaNo = document.createElement('input');
+            agendaNo.setAttribute('type', 'number')
+            agendaNo.setAttribute('name', 'number')
+            agendaNo.setAttribute('placeholder', 'Agenda Number')
+            agendaNo.setAttribute('class', 'p-2 mb-2 mx-2')
+
+            let agenda = document.createElement('input');
+            agenda.setAttribute('type', 'text')
+            agenda.setAttribute('name', 'agenda')
+            agenda.setAttribute('placeholder', 'Enter Agenda')
+            agenda.setAttribute('class', 'p-2 mb-2 mx-2')
+
+            let agendaTime = document.createElement('input');
+            agendaTime.setAttribute('type', 'number')
+            agendaTime.setAttribute('name', 'time')
+            agendaTime.setAttribute('placeholder', 'Time for Agenda')
+            agendaTime.setAttribute('class', 'p-2 mb-2 mx-2')
+
+            let itemRm = document.createElement('input')
+            itemRm.setAttribute("value", "Remove")
+            itemRm.setAttribute("type", "button")
+            itemRm.setAttribute("onclick", "removeItem(this)")
+            itemRm.setAttribute("class", "p-2 mb-2 mx-1 bg-danger text-white uppercase")
+
+            div.append(agendaNo, agenda, agendaTime, itemRm)
+            area.append(div)
+        }
+        
+        function removeItem(e){
+            e.parentNode.remove()
+        }
+
+        let finalSubmit = async() => {
+            window.open('/room/', '_self')
+        }
+
+        butn.addEventListener('click', finalSubmit)
+    </script>
+{% endblock content %}
